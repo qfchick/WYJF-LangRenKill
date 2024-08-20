@@ -4,4 +4,5 @@ void main()
 {
 	Game game;
 	game.start();
+	wait;
 }
