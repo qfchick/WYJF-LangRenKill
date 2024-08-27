@@ -33,6 +33,7 @@ SOFTWARE.*/
 #include <sys/ioctl.h>
 #endif
 
+
 namespace gtl
 {
 	enum COLORS
