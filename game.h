@@ -2,9 +2,8 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <conio.h>
 #include "gametool.h"
-using gtl::Color, gtl::setColor, gtl::tdColor, gtl::clrscr;
+using gtl::COLORS, gtl::textcolor, gtl::clrscr;
 using gtl::sbyte, gtl::ubyte;
 using std::cout;
 #define wait Sleep(2500)
@@ -21,13 +20,13 @@ void idColor(sbyte id)
 	switch (id)
 	{
 	case 0:
-		setColor(Color::Red);
+		textcolor(COLORS::RED);
 		break;
 	case 1:
-		setColor(Color::Green);
+		textcolor(COLORS::GREEN);
 		break;
 	default:
-		setColor(Color::Blue);
+		textcolor(COLORS::BLUE);
 		break;
 	}
 }
@@ -57,45 +56,45 @@ private:
 
 	void Welcome()
 	{
-		setColor(Color::Yellow);	cout << "欢迎游玩" << ' ';
-		setColor(Color::Blue);		cout << "YSJFGame";
-		setColor(Color::Yellow);	cout << '-';
-		setColor(Color::Cyan);		cout << "人机狼人杀" << ' ';
-		setColor(Color::Red);		cout << "！！！" << lbrk;
+		textcolor(COLORS::YELLOW);	cout << "欢迎游玩" << ' ';
+		textcolor(COLORS::BLUE);	cout << "YSJFGame";
+		textcolor(COLORS::YELLOW);	cout << '-';
+		textcolor(COLORS::CYAN);	cout << "人机狼人杀" << ' ';
+		textcolor(COLORS::RED);		cout << "！！！" << lbrk;
 
-		setColor(Color::Yellow);	cout << "作者：" << ' ';
-		setColor(Color::Pink);		cout << "启发鸡" << lbrk;
+		textcolor(COLORS::YELLOW);	cout << "作者：" << ' ';
+		textcolor(COLORS::MAGENTA);	cout << "启发鸡" << lbrk;
 
-		setColor(Color::White);
+		textcolor(COLORS::WHITE);
 		nxtl;
 		for (int i = 0; i < 25; i++)
 			cout << '-';
 		nxtl;
 
 		nxtl;
-		setColor(Color::Black);
+		textcolor(COLORS::BLACK);
 		cout << "[按任意键开始游戏]" << lbrk;
-		_getch();
+		gtl::getch();
 		clrscr();
 	}
 
 	void setDiff()
 	{
-		setColor(Color::Green);
+		textcolor(COLORS::GREEN);
 		slowsay("请选择游戏人数：");
 		nxtl;
 		for (int i = 0; i < diffLst.size(); i++)
 		{
-			setColor(Color::Black);
+			textcolor(COLORS::BLACK);
 			cout << i + 1 << ". ";
-			setColor(Color::White);
+			textcolor(COLORS::WHITE);
 			cout << diffLst.at(i) << '\t';
 		}
 		nxtl;
 		
 		char c;
 		do
-			c = _getch();
+			c = gtl::getch();
 		while (!isdigit(c) && c - '0' >= 1 && c - '0' <= 3);
 		Num = (c - '0' + 1) * 3;
 
@@ -110,7 +109,7 @@ private:
 		plPos = gtl::rand(0, Num - 1);
 		gtl::random_shuffle(gameId.begin(),gameId.end());
 
-		setColor(Color::Yellow);
+		textcolor(COLORS::YELLOW);
 		slowsay("请稍等，正在抽取身份……");
 		nxtl; nxtl;
 		Sleep(2000);
@@ -121,7 +120,7 @@ private:
 		idColor(id);
 		cout << itoId[id] << lbrk;
 
-		setColor(Color::Yellow);
+		textcolor(COLORS::YELLOW);
 		slowsay("您在");
 		Sleep(500);
 		idColor(id);
@@ -130,9 +129,9 @@ private:
 		Sleep(1000);
 		nxtl; nxtl;
 
-		setColor(Color::Black);
+		textcolor(COLORS::BLACK);
 		cout << "[按任意键继续]" << lbrk;
-		_getch();
+		gtl::getch();
 		clrscr();
 	}
 
@@ -168,8 +167,8 @@ private:
 	{
 		for (int i = 1; i <= Num; i++)
 		{
-			setColor(Color::White);	cout << i;
-			setColor(Color::Black);	cout << "号位";
+			textcolor(COLORS::WHITE);	cout << i;
+			textcolor(COLORS::BLACK);	cout << "号位";
 			cout << '\t';
 		}
 		nxtl;
@@ -177,12 +176,12 @@ private:
 		for (auto [id, died] : gameId)
 			if (died)
 			{
-				setColor(Color::Red);
+				textcolor(COLORS::RED);
 				cout << "死亡" << '\t';
 			}
 			else
 			{
-				setColor(Color::Green);
+				textcolor(COLORS::GREEN);
 				cout << "存活" << '\t';
 			}
 		nxtl;
@@ -201,7 +200,7 @@ private:
 		for (int day = 1; !(b = checkGame()); day++)
 		{
 			outStatus();
-			setColor(Color::Yellow);
+			textcolor(COLORS::YELLOW);
 			slowsay("天黑请闭眼~~~"); nxtl; wait;
 			slowsay("狼人请睁眼~~"); nxtl; wait;
 			slowsay("请问你们今晚要杀谁？"); nxtl;
@@ -213,7 +212,7 @@ private:
 				cout << "（输入座位号，0弃权）";
 				char c;
 				do
-					c = _getche();
+					c = gtl::getche();
 				while (!isdigit(c) && c != '0' && c - '0' > Num && gameId[c - '0' - 1].second);
 				yd = c - '0' - 1;
 				nxtl;
@@ -230,7 +229,7 @@ private:
 			clrscr();
 
 			outStatus();
-			setColor(Color::Yellow);
+			textcolor(COLORS::YELLOW);
 			slowsay("女巫请睁眼~~"); nxtl; wait;
 			if (yd != -1) {
 				slowsay("今晚");
@@ -241,14 +240,14 @@ private:
 					cout << "1.救\t2.不救" << lbrk;
 					char c;
 					do
-						c = _getche();
+						c = gtl::getche();
 					while (!isdigit(c) && c != '1' && c != '2');
 					if (c == '1')
 						yd = -1;
 					Sleep(500);
 					clrscr();
 					outStatus();
-					setColor(Color::Yellow);
+					textcolor(COLORS::YELLOW);
 				}
 				else
 				{
@@ -265,7 +264,7 @@ private:
 				cout << "1.用\t2.不用" << lbrk;
 				char c;
 				do
-					c = _getche();
+					c = gtl::getche();
 				while (!isdigit(c) && c != '1' && c != '2'); nxtl; wait;
 				if (c == '1')
 				{
@@ -273,7 +272,7 @@ private:
 					nxtl << "（输入座位号）";
 					char c;
 					do
-						c = _getche();
+						c = gtl::getche();
 					while (!isdigit(c) && c > '0' && c - '0' <= Num && c - '0' - 1 != plPos && gameId[c - '0' - 1].second);
 					dd = c - '0' - 1;
 					nxtl; wait;
@@ -295,7 +294,7 @@ private:
 			clrscr();
 			
 			outStatus();
-			setColor(Color::Yellow);
+			textcolor(COLORS::YELLOW);
 			slowsay("预言家请睁眼~~");
 			nxtl; wait;
 			slowsay("今晚你要查验谁的身份？");
@@ -305,7 +304,7 @@ private:
 				cout << "（输入座位号，0弃权）";
 				char c;
 				do
-					c = _getche();
+					c = gtl::getche();
 				while (!isdigit(c) && c != '0' && c - '0' > Num && gameId[c - '0' - 1].second); nxtl;
 				int t = c - '0' - 1;
 				cout << "Ta的身份是："; wait;
