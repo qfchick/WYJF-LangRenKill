@@ -1,5 +1,4 @@
 #include "game.h"
-#include <windows.h>
 int main()
 {
 	gtl::Utf8_Console();
