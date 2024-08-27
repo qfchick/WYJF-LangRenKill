@@ -11,10 +11,9 @@
 - 使用 *c++17* 语言标准编写
 - 使用**无垠镜方**自研的c++命令行游戏工具库 *gametool*
 - 工具库内包含了自行魔改版的 *conio* 头文件的**全部方法**，将 `conio.h` 和 `conio.c` 文件合并，并加入了一些必要的修改  
-    **魔改版 *conio* 同样开放下载**  
     **注意**：使用相比 *conio* 只需在函数名前加`gt::`前缀，注意所有方法均去掉前面的`c_`前缀  
     ### 对比及例子：
-    #### 原conio & 魔改版conio
+    #### 原conio
     ```cpp
     #include <iostream>
     #include "conio.h"
@@ -31,6 +30,7 @@
     ```cpp
     #include <iostream>
     #include "gametool.h"
+    // 如只需要gtl内conio的内容，也可以导入gtconio.h，用法相同（同样提供）
     // using namespace gtl;
     int main() {
         char c=gtl::getch();

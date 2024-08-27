@@ -2,9 +2,8 @@
 #include <windows.h>
 int main()
 {
-	system("@chcp 65001");
-	gtl::clrscr();
-	
+	gtl::Utf8_Console();
+
 	Game game;
 	while (game.start())
 		;
